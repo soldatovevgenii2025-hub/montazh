@@ -1,0 +1,20 @@
+{
+  "name": "montazh-engine",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "studio": "remotion studio Root.tsx --no-open"
+  },
+  "dependencies": {
+    "remotion": "4.0.526",
+    "@remotion/cli": "4.0.526",
+    "@remotion/media": "4.0.526",
+    "@remotion/captions": "4.0.526",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/react": "19.2.7"
+  }
+}

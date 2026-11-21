@@ -1,0 +1,40 @@
+{
+  "format": "cartoon",
+  "ready": false,
+  "author_approval": "",
+  "style_approval": "",
+  "character_approval": "",
+  "hero": "",
+  "source_photo": "",
+  "languages": [],
+  "platforms": [],
+  "shared_queue": "~/.local/state/video-skills/source-queue",
+  "voices": {},
+  "budgets": {},
+  "style": {
+    "preset": "ночь",
+    "background": "#1F2A44",
+    "accent": "#FFD23F",
+    "text": "#FFFFFF",
+    "fontFamily": "Montserrat ExtraBold",
+    "font_asset": "fonts/Montserrat-ExtraBold.woff2",
+    "captionX": 90,
+    "captionY": 1320,
+    "captionWidth": 900,
+    "captionFontSize": 64
+  },
+  "presenter": {
+    "eyeAnchor": [
+      800,
+      1500
+    ],
+    "scale": 1,
+    "poses": []
+  },
+  "delivery": {
+    "transport": "local"
+  },
+  "whisper_model": "runtime/models/whisper",
+  "products_by_language": {},
+  "accounts_by_language": {}
+}

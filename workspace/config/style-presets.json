@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "default": "ночь",
+  "note": "Готовые наборы стиля. Шрифт Montserrat ExtraBold лежит в fonts/ (лицензия SIL OFL 1.1, fonts/OFL.txt) и работает на macOS, Windows и Linux без установки. Субтитры: нижняя треть кадра, нижний край не ниже 78% высоты, над героем.",
+  "presets": [
+    {
+      "name": "ночь",
+      "about": "тёмно-синий фон, жёлтый акцент, белый текст: ярко и спокойно, под 3D-героев",
+      "style": {
+        "background": "#1F2A44",
+        "accent": "#FFD23F",
+        "text": "#FFFFFF",
+        "fontFamily": "Montserrat ExtraBold",
+        "font_asset": "fonts/Montserrat-ExtraBold.woff2",
+        "captionX": 90,
+        "captionY": 1320,
+        "captionWidth": 900,
+        "captionFontSize": 64
+      }
+    },
+    {
+      "name": "мята",
+      "about": "глубокий бирюзовый фон, коралловый акцент: свежо и тепло",
+      "style": {
+        "background": "#0E3B43",
+        "accent": "#FF8A5B",
+        "text": "#FFFFFF",
+        "fontFamily": "Montserrat ExtraBold",
+        "font_asset": "fonts/Montserrat-ExtraBold.woff2",
+        "captionX": 90,
+        "captionY": 1320,
+        "captionWidth": 900,
+        "captionFontSize": 64
+      }
+    },
+    {
+      "name": "слива",
+      "about": "тёмно-фиолетовый фон, мятный акцент: контрастно и игриво",
+      "style": {
+        "background": "#2E1A47",
+        "accent": "#5CF2C3",
+        "text": "#FFFFFF",
+        "fontFamily": "Montserrat ExtraBold",
+        "font_asset": "fonts/Montserrat-ExtraBold.woff2",
+        "captionX": 90,
+        "captionY": 1320,
+        "captionWidth": 900,
+        "captionFontSize": 64
+      }
+    }
+  ]
+}

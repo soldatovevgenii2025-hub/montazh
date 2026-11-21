@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "partners": [
+    {
+      "id": "card",
+      "service": "Картон",
+      "url": "https://lk.wallet.kartonpay.com?wallet_kartonpay_com=5uhwGt7",
+      "purpose": "карта для оплаты зарубежных сервисов",
+      "free_tier": false,
+      "step": "карта",
+      "optional": true
+    },
+    {
+      "id": "images",
+      "service": "",
+      "url": "",
+      "purpose": "картинки героя и поз",
+      "free_tier": false,
+      "step": "герой",
+      "optional": true
+    },
+    {
+      "id": "voice",
+      "service": "ElevenLabs",
+      "url": "",
+      "purpose": "синтез речи своим голосом (по желанию)",
+      "free_tier": true,
+      "step": "голос",
+      "optional": true
+    },
+    {
+      "id": "trends",
+      "service": "vidIQ",
+      "url": "",
+      "purpose": "тренды (ступень 2)",
+      "free_tier": true,
+      "step": "тренды",
+      "optional": true
+    }
+  ]
+}

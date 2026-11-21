@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "id": "hero-3",
+  "ready": true,
+  "name": "Робот",
+  "description": "Маленький дружелюбный робот: круглый корпус, лицо рисуется на экране.",
+  "sheet": "heroes/hero-3/sheet.png",
+  "eyeAnchor": [
+    540,
+    559
+  ],
+  "scale": 1.3366,
+  "poses": [
+    {
+      "name": "explains",
+      "about": "объясняет: руки разведены в стороны",
+      "rest": "heroes/hero-3/explains-rest.png",
+      "aa": "heroes/hero-3/explains-aa.png",
+      "oo": "heroes/hero-3/explains-oo.png",
+      "eyes": [
+        361,
+        280
+      ],
+      "width": 722,
+      "height": 817
+    },
+    {
+      "name": "point",
+      "about": "показывает на зрителя",
+      "rest": "heroes/hero-3/point-rest.png",
+      "aa": "heroes/hero-3/point-aa.png",
+      "oo": "heroes/hero-3/point-oo.png",
+      "eyes": [
+        361,
+        280
+      ],
+      "width": 722,
+      "height": 817
+    },
+    {
+      "name": "relax",
+      "about": "расслабленно стоит, отдыхает",
+      "rest": "heroes/hero-3/relax-rest.png",
+      "aa": "heroes/hero-3/relax-aa.png",
+      "oo": "heroes/hero-3/relax-oo.png",
+      "eyes": [
+        361,
+        280
+      ],
+      "width": 722,
+      "height": 817
+    },
+    {
+      "name": "joy",
+      "about": "радуется: руки вверх",
+      "rest": "heroes/hero-3/joy-rest.png",
+      "aa": "heroes/hero-3/joy-aa.png",
+      "oo": "heroes/hero-3/joy-oo.png",
+      "eyes": [
+        361,
+        280
+      ],
+      "width": 722,
+      "height": 817
+    }
+  ]
+}

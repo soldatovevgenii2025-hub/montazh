@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "id": "hero-2",
+  "ready": true,
+  "name": "Котёнок",
+  "description": "Рыже-белый котёнок на задних лапах: озорной, хвост трубой.",
+  "sheet": "heroes/hero-2/sheet.png",
+  "eyeAnchor": [
+    540,
+    428
+  ],
+  "scale": 1.1489,
+  "poses": [
+    {
+      "name": "explains",
+      "about": "объясняет: руки разведены в стороны",
+      "rest": "heroes/hero-2/explains-rest.png",
+      "aa": "heroes/hero-2/explains-aa.png",
+      "oo": "heroes/hero-2/explains-oo.png",
+      "eyes": [
+        341,
+        213
+      ],
+      "width": 682,
+      "height": 952
+    },
+    {
+      "name": "point",
+      "about": "показывает на зрителя",
+      "rest": "heroes/hero-2/point-rest.png",
+      "aa": "heroes/hero-2/point-aa.png",
+      "oo": "heroes/hero-2/point-oo.png",
+      "eyes": [
+        341,
+        213
+      ],
+      "width": 682,
+      "height": 952
+    },
+    {
+      "name": "relax",
+      "about": "расслабленно стоит, отдыхает",
+      "rest": "heroes/hero-2/relax-rest.png",
+      "aa": "heroes/hero-2/relax-aa.png",
+      "oo": "heroes/hero-2/relax-oo.png",
+      "eyes": [
+        341,
+        213
+      ],
+      "width": 682,
+      "height": 952
+    },
+    {
+      "name": "joy",
+      "about": "радуется: руки вверх",
+      "rest": "heroes/hero-2/joy-rest.png",
+      "aa": "heroes/hero-2/joy-aa.png",
+      "oo": "heroes/hero-2/joy-oo.png",
+      "eyes": [
+        341,
+        213
+      ],
+      "width": 682,
+      "height": 952
+    }
+  ]
+}

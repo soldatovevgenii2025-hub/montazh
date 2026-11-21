@@ -1,0 +1,10 @@
+runtime/
+.env
+*.env
+*.local.json
+episodes/
+assets/
+research/
+node_modules/
+__pycache__/
+*.pyc

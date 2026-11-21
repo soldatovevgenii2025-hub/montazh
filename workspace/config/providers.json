@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "image": {
+    "provider": "",
+    "model": "",
+    "env_key": "",
+    "price_hint_eur": null
+  }
+}

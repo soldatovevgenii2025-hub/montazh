@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "id": "hero-1",
+  "ready": true,
+  "name": "Банан",
+  "description": "Говорящий банан в голубых кедах: дерзкий, с хитрым прищуром.",
+  "sheet": "heroes/hero-1/sheet.png",
+  "eyeAnchor": [
+    540,
+    547
+  ],
+  "scale": 0.9827,
+  "poses": [
+    {
+      "name": "explains",
+      "about": "объясняет: руки разведены в стороны",
+      "rest": "heroes/hero-1/explains-rest.png",
+      "aa": "heroes/hero-1/explains-aa.png",
+      "oo": "heroes/hero-1/explains-oo.png",
+      "eyes": [
+        362,
+        368
+      ],
+      "width": 724,
+      "height": 1109
+    },
+    {
+      "name": "point",
+      "about": "показывает на зрителя",
+      "rest": "heroes/hero-1/point-rest.png",
+      "aa": "heroes/hero-1/point-aa.png",
+      "oo": "heroes/hero-1/point-oo.png",
+      "eyes": [
+        362,
+        368
+      ],
+      "width": 724,
+      "height": 1109
+    },
+    {
+      "name": "relax",
+      "about": "расслабленно стоит, отдыхает",
+      "rest": "heroes/hero-1/relax-rest.png",
+      "aa": "heroes/hero-1/relax-aa.png",
+      "oo": "heroes/hero-1/relax-oo.png",
+      "eyes": [
+        362,
+        368
+      ],
+      "width": 724,
+      "height": 1109
+    },
+    {
+      "name": "joy",
+      "about": "радуется: руки вверх",
+      "rest": "heroes/hero-1/joy-rest.png",
+      "aa": "heroes/hero-1/joy-aa.png",
+      "oo": "heroes/hero-1/joy-oo.png",
+      "eyes": [
+        362,
+        368
+      ],
+      "width": 724,
+      "height": 1109
+    }
+  ]
+}
