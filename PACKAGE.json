@@ -1,7 +1,7 @@
 {
   "name": "montazh",
   "title": "МОНТАЖ: мультролики с твоим героем",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "based_on": "creator-cartoon 1.1.0 (MIT)",
   "edition": "free",
   "schema": 1,

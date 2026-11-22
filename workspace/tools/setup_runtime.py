@@ -16,13 +16,52 @@ def digest(path):
     with Path(path).open('rb') as f:
         for b in iter(lambda:f.read(1048576),b''):h.update(b)
     return h.hexdigest()
-def download(url,path,expected=None):
+class ChecksumError(RuntimeError):pass
+def download(url,path,expected=None,mirrors=()):
+    """Скачать файл модели: сначала основной источник, потом зеркала по порядку.
+    Недоступный источник пропускаем; несовпадение SHA256 - остановка, другой файл не подставляем."""
     path.parent.mkdir(parents=True,exist_ok=True)
     if path.is_file() and (not expected or digest(path)==expected):return
-    tmp=path.with_suffix(path.suffix+'.partial')
-    with urllib.request.urlopen(url,timeout=90) as r,tmp.open('wb') as f:shutil.copyfileobj(r,f)
-    if expected and digest(tmp)!=expected:raise RuntimeError('Контрольная сумма модели не совпала: '+path.name)
-    tmp.replace(path)
+    tmp=path.with_suffix(path.suffix+'.partial');errors=[]
+    for source in [url,*mirrors]:
+        try:
+            with urllib.request.urlopen(source,timeout=90) as r,tmp.open('wb') as f:shutil.copyfileobj(r,f)
+        except (OSError,ValueError) as e:
+            tmp.unlink(missing_ok=True);errors.append(f'{source}: {e}')
+            print('Источник недоступен, пробую следующий:',source,'-',e,file=sys.stderr);continue
+        if expected and digest(tmp)!=expected:
+            tmp.unlink(missing_ok=True)
+            raise ChecksumError('Контрольная сумма модели не совпала: '+path.name+' (источник '+source+'). Модель не подменяем: запустите команду ещё раз, если снова не сошлось - остановитесь и напишите автору навыка.')
+        tmp.replace(path);return
+    raise RuntimeError('Не удалось скачать '+path.name+' ни из одного источника:\n'+'\n'.join(errors))
+SYSTEM_BROWSERS={
+ 'darwin':['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome','/Applications/Chromium.app/Contents/MacOS/Chromium'],
+ 'linux':['google-chrome','google-chrome-stable','chromium','chromium-browser']}
+def system_browser(platform=None,which=shutil.which,exists=os.path.isfile):
+    """Путь к системному Chrome/Chromium или None."""
+    platform=platform or ('darwin' if sys.platform=='darwin' else 'linux')
+    for name in SYSTEM_BROWSERS.get(platform,[]):
+        if name.startswith('/'):
+            if exists(name):return name
+        else:
+            found=which(name)
+            if found:return found
+    return None
+def ensure_browser(runtime,config,runner=None,finder=None):
+    """Браузер для рендера: штатный Remotion, а если его скачать нельзя - системный Chrome/Chromium.
+    Путь к системному браузеру записывается в engine/runtime.json как browserExecutable."""
+    runner=runner or run;finder=finder or system_browser
+    data=json.loads(config.read_text()) if config.is_file() else {}
+    try:
+        runner(['npx','--no-install','remotion','browser','ensure'],cwd=runtime)
+        if data.pop('browserExecutable',None):config.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+        return None
+    except (subprocess.CalledProcessError,OSError):
+        browser=finder()
+        if not browser:raise SystemExit('Не удалось скачать браузер для рендера (remotion browser ensure), и системный Chrome или Chromium не найден. Поставьте Google Chrome (macOS: brew install --cask google-chrome; Linux/WSL: sudo apt install chromium) и запустите команду снова.')
+        data['browserExecutable']=browser;config.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+        print('Браузер Remotion скачать не удалось, для рендера взят системный:',browser)
+        return browser
 INSTALL_HELP={
  'node':'macOS: brew install node@20; Linux/WSL: sudo apt install nodejs npm (нужна версия 20 или новее)',
  'npm':'ставится вместе с Node.js',
@@ -52,19 +91,19 @@ def main():
     run([py,'-m','pip','install','-r',ROOT/'requirements-pro.txt' if (ROOT/'requirements-pro.txt').exists() and edition_pro() else ROOT/'requirements.txt'])
     shutil.copy2(ROOT/'engine/remotion/package.json',runtime/'package.json')
     run(['npm','install','--no-audit','--no-fund'],cwd=runtime)
-    run(['npx','--no-install','remotion','browser','ensure'],cwd=runtime)
+    target=ROOT/'engine/runtime.json'
+    if not target.exists():shutil.copy2(ROOT/'engine/runtime.example.json',target)
+    ensure_browser(runtime,target)
     silence=runtime/'silence.wav'
     if not silence.exists():
         with wave.open(str(silence),'wb') as f:f.setnchannels(2);f.setsampwidth(2);f.setframerate(48000);f.writeframes(b'\0'*(48000*4))
-    target=ROOT/'engine/runtime.json'
-    if not target.exists():shutil.copy2(ROOT/'engine/runtime.example.json',target)
     if a.models:
         # Pin downloads to a recorded revision and validate LFS objects. No latest-model substitution.
         lock=json.loads((ROOT/'model-lock.json').read_text())
         for model in lock['models']:
             if model.get('optional') and model.get('id')!=a.whisper:continue
             for f in model['files']:
-                download(f['url'],ROOT/f['path'],f.get('sha256'))
+                download(f['url'],ROOT/f['path'],f.get('sha256'),f.get('mirrors',[]))
         if (ROOT/'tools/finish_models.py').exists():run([py,ROOT/'tools/finish_models.py'])
     receipt={'python':str(py.relative_to(ROOT)),'model_files':[]}
     for p in sorted((runtime/'models').rglob('*')):

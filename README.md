@@ -15,9 +15,13 @@
 Фраза одна и та же для Claude Code и для Codex. Агент сам скачает скилл, проверит компьютер,
 задаст пару вопросов и проведёт до первого мультика.
 
-**Запасной путь.** Скачай архив `montazh-free-0.1.1.tar.gz` со страницы
+Работает и в приложении Claude: скачай `montazh-skill.zip` со страницы
+[релиза](https://github.com/soldatovevgenii2025-hub/montazh/releases/latest) и загрузи его в разделе скиллов
+в настройках приложения (экспериментально).
+
+**Запасной путь.** Скачай архив `montazh-free-0.1.2.tar.gz` со страницы
 [релиза](https://github.com/soldatovevgenii2025-hub/montazh/releases/latest) и напиши агенту:
-«Найди у меня файл montazh-free-0.1.1.tar.gz и установи скилл по INSTALL.md».
+«Найди у меня файл montazh-free-0.1.2.tar.gz и установи скилл по INSTALL.md».
 
 ## Что нужно
 

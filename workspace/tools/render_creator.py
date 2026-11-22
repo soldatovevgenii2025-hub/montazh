@@ -3,6 +3,12 @@ import argparse,json,math,shutil,subprocess,wave
 from pathlib import Path
 import studio
 ROOT=studio.ROOT
+def browser_args():
+    # Системный Chrome/Chromium, если setup_runtime.py не смог скачать браузер Remotion.
+    config=ROOT/'engine/runtime.json'
+    try:browser=json.loads(config.read_text()).get('browserExecutable') if config.is_file() else None
+    except ValueError:browser=None
+    return ['--browser-executable',browser] if browser else []
 # Пауза, после которой начинается новая реплика. live_voice.py prepare сокращает паузы длиннее 0,5 с до 0,3 с,
 # поэтому в готовой записи граница реплики видна как зазор от 0,25 с.
 CAPTION_PAUSE=0.25
@@ -64,7 +70,7 @@ def main():
         (target/'node_modules').symlink_to((ROOT/'runtime/node_modules').resolve(),target_is_directory=True)
         studio.write(path/'render-manifest.json',{'files':[{'path':str(p.relative_to(target)),'sha256':studio.sha(p)} for p in target.rglob('*') if p.is_file() and 'node_modules' not in p.parts],'audio_sha256':studio.sha(path/'voice.bin')})
         studio.run(ep,['npx','--no-install','tsc','--noEmit'],target)
-        final=path/'render.mp4';studio.run(ep,['npx','--no-install','remotion','render','Root.tsx','CreatorFilm',final,'--codec','h264','--audio-codec','aac','--audio-bitrate','192k','--pixel-format','yuv420p','--crf','17','--concurrency','2'],target)
+        final=path/'render.mp4';studio.run(ep,['npx','--no-install','remotion','render','Root.tsx','CreatorFilm',final,'--codec','h264','--audio-codec','aac','--audio-bitrate','192k','--pixel-format','yuv420p','--crf','17','--concurrency','2',*browser_args()],target)
         # Remove source/tool comments and timestamps, preserving video/audio streams.
         cleaned=path/'render-clean.mp4';studio.run(ep,['ffmpeg','-v','error','-y','-i',final,'-i',path/'voice.bin','-map','0:v:0','-map','1:a:0','-map_metadata','-1','-metadata','comment=','-c:v','copy','-c:a','aac','-ar','48000','-b:a','192k','-t',str(film['frames']/30),'-movflags','+faststart',cleaned]);cleaned.replace(final)
         studio.attach(ep,'render',key,str(final.relative_to(ROOT)))
